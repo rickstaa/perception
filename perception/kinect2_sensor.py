@@ -32,6 +32,7 @@ class Kinect2PacketPipelineMode:
     """Type of pipeline for Kinect packet processing.
     """
     OPENGL = 0
+    OPENCL = 0
     CPU = 1
 
 class Kinect2FrameMode:
@@ -80,7 +81,7 @@ class Kinect2Sensor(CameraSensor):
         Parameters
         ----------
         packet_pipeline_mode : int
-            Either Kinect2PacketPipelineMode.OPENGL or
+            Either Kinect2PacketPipelineMode.OPENGL, Kinect2PacketPipelineMode.OPENCL or
             Kinect2PacketPipelineMode.CPU -- indicates packet processing type.
 
         registration_mode : int
@@ -176,6 +177,8 @@ class Kinect2Sensor(CameraSensor):
         # open packet pipeline
         if self._packet_pipeline_mode == Kinect2PacketPipelineMode.OPENGL:
             self._pipeline = lf2.OpenGLPacketPipeline()
+        elif self._packet_pipeline_mode == Kinect2PacketPipelineMode.OPENCL:
+            self._pipeline = lf2.OpenCLPackagePipeline()
         elif self._packet_pipeline_mode == Kinect2PacketPipelineMode.CPU:
             self._pipeline = lf2.CpuPacketPipeline()
 
