@@ -3,6 +3,7 @@ Setup of Berkeley AUTOLab Perception module Python codebase.
 Author: Jeff Mahler
 """
 from setuptools import setup
+import os
 
 requirements = [
     'numpy',
@@ -22,7 +23,8 @@ requirements = [
     'ffmpeg-python'
 ]
 
-exec(open('perception/version.py').read())
+exec(open(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                 'perception/version.py')).read())
 
 setup(name='autolab_perception',
       version=__version__,
