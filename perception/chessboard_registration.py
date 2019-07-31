@@ -80,6 +80,7 @@ class CameraChessboardRegistration:
             y_points_left = config['y_points_left']
             num_images = 1
         vis = config['vis']
+        vis_type = config['vis_type']
 
         # read params from sensor
         logging.info('Registering camera %s' %(sensor.frame))
@@ -128,11 +129,15 @@ class CameraChessboardRegistration:
         
             if vis:
                 plt.figure()
-                plt.imshow(small_color_im.data)
-                for i in range(sx):
-                    plt.scatter(small_corner_px[i,0], small_corner_px[i,1], s=25, c='b')
-                plt.axis('off')
-                plt.show()
+                if vis_type == 1:
+                    tmp_image = cv2.drawChessboardCorners(big_color_im.data, (sx, sy), corner_px, True) # Draw chessboard
+                    plt.imshow(tmp_image)
+                    plt.show()
+                    del tmp_image
+                else:
+                    for i in range(sx*sy):
+                        plt.scatter(corner_px[i,0], corner_px[i,1], s=25, c='b')
+                        plt.show()
 
             # project points into 3D
             camera_intr = sensor.ir_intrinsics
