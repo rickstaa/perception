@@ -2308,7 +2308,7 @@ class BinaryImage(Image):
             The new pruned binary image.
         """
         # get all contours (connected components) from the binary image
-        contours, hierarchy = cv2.findContours(
+        _, contours, hierarchy = cv2.findContours(
             self.data.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
         num_contours = len(contours)
         middle_pixel = np.array(self.shape)[:2] / 2
