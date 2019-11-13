@@ -10,7 +10,7 @@ requirements = [
     'autolab_core',
     'matplotlib<=2.2.0',
     'multiprocess',
-    'opencv-python',
+    'opencv-contrib-python',
     'keras',
     'cycler',
     'Pillow',
